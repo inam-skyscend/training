@@ -1,0 +1,463 @@
+1. Create a user with only database create access rights.
+
+-->    createuser -d inamhusain;
+
+2. Create a user with superuser access rights.
+
+-->    createuser -d -s siraj;
+
+3. Create a user with database creation, superuser and role creation access rights.
+
+-->     createuser -d -s  -r super;
+
+4. Drop any one of the users which you have created.
+   
+-->    dropuser siraj;
+     
+5. Alter any one user’s password with your desired password.
+ 
+-->    alter user super with password 'inam2001';
+
+6. Create a database.
+
+-->    createdb test1;
+
+7. Delete a database which is created.
+
+-->    dropdb  test1;
+
+8. Create a database and add a table employee with specified fields.
+◦ Employee ID
+◦ Name
+◦ Email
+◦ Phone no
+◦ Designation
+◦ Department
+◦ Birth Date
+◦ Join Date
+
+-->  createdb test1;
+-->  create table Employee(Employee_ID int,Name Varchar(64), Email Varchar(64), Phone_no Varchar(64), Designation Varchar(64), Department Varchar(64), dob date,doj date);
+
+9. Modify the table and add two fields as following.
+◦ Level
+◦ Qualification
+◦ Join Date
+
+--> alter table employee add column level integer;
+--> alter table employee add column qualification varchar(64);
+
+
+
+10. Modify a table and Delete a column from the table.
+
+-->  alter table employee alter column qualification type varchar(128);
+--> alter table employee drop column qualification;
+
+11. Insert 10 records with unique employee ids in the employee table.
+
+--> insert into employee(employee_id,name,email,phone_no,designation,department,dob,doj,level) values(1,'shivam','shivam4@gmail.com','975645','intern','it','2000-07-23','2018-06-14',2);
+
+--> select * from employee;
+
+12. Update all the records together. Update only one field.
+
+-->  update employee set department='computer';
+
+13. Delete a single record from a table.
+
+-->  delete from employee where employee_id=6; 
+
+14. Delete all the records from a table using Delete.
+
+-->   delete from employee; 
+
+15. Delete all the records from a table without using Delete.
+
+-->  truncate employee; 
+
+16. Create a table using the Create script in pgAdmin.
+
+--> create table student(name  varchar(64),roll_no integer,active boolean,fees decimal,dob date,start_time timestamp);
+
+CREATE TABLE student
+(
+    name character varying(64),
+    roll_no integer,
+    active boolean,
+    fees decimal,
+    dob date,
+    start_time timestamp
+);
+
+
+17. Insert 10 records using the Insert script in pgAdmin.
+
+-->  table>script>insert script
+
+    INSERT INTO student(
+	name, roll_no, active, fees, dob, start_time)
+	VALUES ('Yogesh',8, true,340.00, '1995-03-25', '2021-07-24');
+
+ 
+18. Update a record using the Update script in pgAdmin.
+
+-->  UPDATE student
+	SET name='rakesh' WHERE roll_no=11;
+
+19. Delete a record using the Delete script in pgAdmin.
+
+-->   DELETE FROM student
+	WHERE name='rakesh';
+
+20. Create a table from the Pgadmin.
+
+-->  object > create > table > general – tablename > column-column add > save 
+   
+        CREATE TABLE student
+(
+    name character varying(64) ,
+    roll_no integer,
+    active boolean,
+    fees numeric,
+    dob date,
+    start_time timestamp 
+);
+
+21. Update a table and add a column from pgAdmin.
+
+-->  ALTER TABLE public.student
+    ADD COLUMN surname character varying(64);
+
+--> ALTER TABLE public.student
+    Alter column surname type varchar(128);
+ 
+22. Remove a column from a table from pgAdmin.
+
+--> ALTER TABLE public.student DROP COLUMN surname;
+
+23. Update record from the Pgadmin.
+
+-->  UPDATE public.student
+	SET name='meet'
+	WHERE roll_no=3;
+24. View all the records of a table.
+
+-->  select * from student;
+
+25. Write a select query with multiple conditions using ‘AND’ and ‘OR’.
+
+-->  select * from student where active=true and fees=500.00;
+       select * from student where active=true or fees=500.00;
+
+
+26. Create a table employee where it contains id, name, city. Find the city which ends
+ with ‘abad’. Enter 30 records scattered in different cities like Hyderabad,
+ Ahmedabad, Mumbai, Delhi, Chennai, Kochin, Kolkatta, Pune, Bangalore.
+
+-->  create table employee(emp_id integer,name varchar(64),city char(64));
+       insert into employee(emp_id,name,city) values (1,'inam','Ahmedabad');
+       select * from employee where city like '%abad';
+ 
+        emp_id |  name   |   city    
+--------+---------+-----------
+      1 | inam   | Ahmedabad
+      2 | manu    | Ahmedabad
+      3 | parth   | Hyderabad
+      4 | shivam   | Hyderabad
+      5 | suresh  | Hyderabad
+      6 | satyam  | Hyderabad
+      7 | rani    | Hyderabad
+     18 | darshan | Ahmedabad
+     19 | yogesh   | Ahmedabad
+(9 rows)
+
+
+
+27. Search records where the city contains the string ‘under’.
+
+--> select * from employee where city like 'kochin';
+     
+    emp_id |   name   |  city  
+--------+----------+--------
+     22 | bhavesh  | kochin
+     23 | bhavisha | kochin
+     29 | avi      | kochin
+     30 | avishka  | kochin
+(4 rows)
+
+
+28. Search records where the third last character of the city is ‘b’.
+
+-->  select * from employee where city like '%b__';
+       emp_id |  name   |   city    
+--------+---------+-----------
+      1 | inam   | Ahmedabad
+      2 | manu    | Ahmedabad
+      3 | parth   | Hyderabad
+      4 | shivam   | Hyderabad
+      5 | suresh  | Hyderabad
+      6 | satyam  | Hyderabad
+      7 | rani    | Hyderabad
+      8 | rajesh  | mumbai
+      9 | sarjan  | mumbai
+     10 | anup    | mumbai
+     11 | anuj    | mumbai
+     18 | darshan | Ahmedabad
+     19 | yogesh   | Ahmedabad
+(13 rows)
+
+
+29. Search the records where first characterof the city is ‘A’.
+
+-->   select * from employee where city like 'A%';
+
+emp_id |  name   |   city    
+--------+---------+-----------
+      1 | inam   | Ahmedabad
+      2 | manu    | Ahmedabad
+     18 | darshan | Ahmedabad
+     19 | yogesh   | Ahmedabad
+(4 rows)
+
+30. Search the records where second Charator of the city is ‘o’.
+
+-->  select * from employee where city like '_o%';
+
+emp_id |   name   |   city   
+--------+----------+----------
+     22 | bhavesh  | kochin
+     23 | bhavisha | kochin
+     25 | bhagyesh | kolkatta
+     26 | manisha  | kolkatta
+     27 | zalak    | kolkatta
+     29 | avi      | kochin
+     30 | avishka  | kochin
+(7 rows)
+
+
+31. Search first 10 records.
+
+--> select * from employee limit 10;
+
+emp_id |  name  |   city    
+--------+--------+-----------
+      1 | shivam  | Ahmedabad
+      2 | manu   | Ahmedabad
+      3 | parth  | Hyderabad
+      4 | inam  | Hyderabad
+      5 | suresh | Hyderabad
+      6 | sataym | Hyderabad
+      7 | rani   | Hyderabad
+      8 | rajesh | mumbai
+      9 | sarjan | mumbai
+     10 | anup   | mumbai
+(10 rows)
+
+
+32. Search first 5 records where city is Mumbai.
+
+-->  select * from employee where city like 'mumbai' limit 5;
+
+emp_id |  name  |  city  
+--------+--------+--------
+      8 | rajesh | mumbai
+      9 | sarjan | mumbai
+     10 | anup   | mumbai
+     11 | anuj   | mumbai
+(4 rows)
+
+33. Search first 5 records where city is Mumbai or Bangalore. Search the next 5
+records skipping the first 5 records where city is Mumbai or Bangalore.
+
+-->  select * from employee where city like 'mumbai' or  city like 'bangalore' limit 5;
+
+emp_id |  name  |   city    
+--------+--------+-----------
+      8 | rajesh | mumbai
+      9 | sarjan | mumbai
+     10 | anup   | mumbai
+     11 | anuj   | mumbai
+     12 | anuja  | bangalore
+(5 rows)
+
+-->  select * from employee where city like 'mumbai' or  city like 'bangalore' limit 6 offset 5; 
+
+emp_id |  name   |   city    
+--------+---------+-----------
+     13 | anubhav | bangalore
+(1 row)
+
+
+34. Sort the records where city is Mumbai or Bangalore by City Name.
+
+-->  select * from employee where city like 'mumbai' or city like 'bangalore' order by city asc;
+
+emp_id |  name   |   city    
+--------+---------+-----------
+     12 | anuja   | bangalore
+     13 | anubhav | bangalore
+      8 | rajesh  | mumbai
+      9 | sarjan  | mumbai
+     10 | anup    | mumbai
+     11 | anuj    | mumbai
+(6 rows)
+
+35. Sort all the records of the table by ID in descending order.
+
+--> select * from employee  order by emp_id  desc;
+
+ emp_id |   name   |   city    
+--------+----------+-----------
+     30 | avishka  | kochin
+     29 | avi      | kochin
+     28 | arati    | chennai
+     27 | zalak    | kolkatta
+     26 | manisha  | kolkatta
+     25 | bhagyesh | kolkatta
+     24 | bhagya   | chennai
+     23 | bhavisha | kochin
+     22 | bhavesh  | kochin
+     21 | bhavya   | Delhi
+     20 | ramya    | Delhi
+     19 | yogesh    | Ahmedabad
+     18 | darshan  | Ahmedabad
+     17 | yogesh   | pune
+     16 | bhoomi   | pune
+     15 | savio    | pune
+     14 | anubhav  | pune
+     13 | anubhav  | bangalore
+     12 | anuja    | bangalore
+     11 | anuj     | mumbai
+     10 | anup     | mumbai
+      9 | sarjan   | mumbai
+      8 | rajesh   | mumbai
+      7 | rani     | Hyderabad
+      6 | satyam   | Hyderabad
+      5 | suresh   | Hyderabad
+      4 | shivam    | Hyderabad
+      3 | parth    | Hyderabad
+      2 | manu     | Ahmedabad
+      1 | inam    | Ahmedabad
+(30 rows)
+
+36. Insert few records where the city is not entered. Search all the records where the
+city field is blank.
+
+-->   insert into employee(emp_id,name) values (31,'surekha');
+-->   select * from employee where city is null;
+ 
+emp_id |  name   | city 
+--------+---------+------
+      4 | shivam   | 
+     20 | ramya   | 
+     15 | savio   | 
+      7 | rani    | 
+     29 | avi     | 
+     31 | surekha | 
+(6 rows)
+
+
+
+37. Enter few duplicate records where name is duplicate. Select unique records from
+a table.
+
+--> insert into employee(emp_id,name,city) values (33,'inam','Delhi');
+--> select distinct(name) from employee;
+
+ name   
+----------
+ anuj
+ suresh
+ darshan
+ manu
+ yogesh
+ rani
+ shivam
+ bhavesh
+ anubhav
+ raman
+ zalak
+ sarjan
+ avishka
+ ramya
+ manisha
+ bhagyesh
+ bhavisha
+ arati
+ bhoomi
+ anuja
+ anup
+ parth
+ bhagya
+ avi
+ bhavya
+ rajesh
+ satyam
+ savio
+ surekha
+ inam
+(30 rows)
+
+
+38. Enter a column amount in the table. Get a total of the complete amount.
+
+-->  alter table employee add column amount decimal;
+--> update employee set amount=10000 where city='Ahmedabad';
+-->  select sum(amount) from employee;
+  sum   
+--------
+ 407000
+(1 row)
+
+
+39. Get total of amount by city.
+
+--> select sum(amount) from employee group by city;
+  sum  
+-------
+ 60000
+      
+ 48000
+ 52000
+ 57000
+ 54000
+ 22000
+ 38000
+ 36000
+ 40000
+(10 rows)
+
+40. Get avg of amount by city.
+
+-->  select avg(amount) from employee group by city;
+          avg           
+------------------------
+     15000.000000000000
+                       
+     16000.000000000000
+     13000.000000000000
+     19000.000000000000
+     18000.000000000000
+ 11000.0000000000000000
+     19000.000000000000
+ 12000.0000000000000000
+ 10000.0000000000000000
+(10 rows)
+
+
+41.  Get maximum amount from all records
+
+--> select max(amount) from employee;
+  max  
+-------
+ 19000
+(1 row)
+
+42. Get minimum amount from all records.
+
+-->  select min(amount) from employee;
+  min  
+-------
+ 10000
+(1 row)

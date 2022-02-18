@@ -1,0 +1,11 @@
+v=15
+print(type(v))
+f=float(v)
+print(type(f))
+print(f)
+b=bool(v)
+print(type(b))
+print(b)
+s=str(v)
+print(type(s))
+print(s)

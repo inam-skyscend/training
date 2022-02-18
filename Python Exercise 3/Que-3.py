@@ -1,0 +1,13 @@
+# 3. Handle an error with try-except-else.
+
+def divide(x, y):
+    try:
+        result = x // y
+    except ZeroDivisionError:
+        print("Sorry ! You are dividing by zero ")
+    else:
+        print("Yeah ! Your answer is :", result)
+
+
+divide(3, 2)
+divide(3, 0)
